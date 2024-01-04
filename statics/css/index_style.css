@@ -1,0 +1,49 @@
+@font-face {
+    font-family: samim;
+    src: url(./admin/assets/font/Samim-Medium-FD.woff2);
+}
+
+* {
+    font-family: samim;
+}
+body{
+    background: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    background: #fff;
+    width: 400px;
+    box-shadow:2px 2px 2px 1px rgb(0 0 0 / 20%);
+    border-radius: 10px;
+    margin-top: 30vh;
+}
+.app-title {
+    text-align: center;
+    color: #777;
+    font-size: small;
+}
+
+h1{
+    font-size: 20px;
+}
+
+.button {
+    margin: 0 auto;
+    width: 350px;
+}
+button {
+    width: 100%;
+    margin: 15px 0 15px 0;
+    height: 60px;
+    border-radius: 5px;
+    background: #3498db;
+    color: #ffffff;
+    font-size: 15px;
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow: none;
+    transition: 0.25s;
+    outline: none;
+}

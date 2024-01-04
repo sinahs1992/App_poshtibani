@@ -1,0 +1,62 @@
+{% load static %}
+{% load jformat %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انبار پشتیبان</title>
+    <link rel="stylesheet" href="{% static "css/job.css" %}">
+    {% comment %} <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script> {% endcomment %}
+</head>
+<body dir="rtl">
+    <div class="user">
+        <div class="user-navbar">
+            <div class="title-user">
+                <h1 id="user-name">{{ request.user.get_full_name }}</h1>
+                <h2 id="date-now">
+                    {{ now|jformat:"%H:%M  %Y/%m/%d" }}
+                    {% comment %} <script>
+                        date =moment();
+                        date = date.format("hh/m");
+                        document.getElementById('date-now').innerHTML= date
+                    </script> {% endcomment %}
+                </h2>
+            </div>
+        </div>
+    </div>
+    <!-- form -->
+    <div class="table">
+        <h1>انبار پشتیبان</h1>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>وضعیت</th>
+                    <th>سریال دستگاه</th>
+                    <th>تاریخ رسید</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row.status }}</td>
+                        <td>{{ row.device_code }}</td>
+                        <td>{{ row.created_date|jformat:"%Y/%m/%d" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form class="send" action="">
+            <h1 class="send-h1">عودت دستگاه انصرافی</h1>
+            <div class="send-input">
+            <label for="sn">سریال دستگاه</label>
+            <input type="text" name="sn" id="">
+            <button class="btn" type="submit">ثبت</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

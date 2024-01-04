@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/index_style.css" %}">
+</head>
+<body>
+    <div class="container">
+        <div class="app-title">
+            <h1>.پنل مورد نظر را انتخاب کنید</h1>
+        </div>
+        <div class="button">
+            <div class="admin">
+                <a href="./admin/admin.html"><button>پنل سرپرست</button></a>
+            </div>
+            <div class="staff">
+                <a href="{% url "accounts:staff-login" %}"><button>پنل پشتیبان</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
