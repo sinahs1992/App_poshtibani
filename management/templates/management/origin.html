@@ -10,14 +10,14 @@
 <body>
     <div class="container">
         <div class="app-title">
-            <h1>.پنل مورد نظر را انتخاب کنید</h1>
+            <h1>شرکت کارا الکترونیک آریان کیش کاسپین</h1>
         </div>
         <div class="button">
             <div class="admin">
-                <a href="{% url "management:management-select-page" %}"><button>پنل سرپرست</button></a>
+                <a href="{% url "management:inventory-page" %}"><button>پنل انبار</button></a>
             </div>
             <div class="staff">
-                <a href="{% url "accounts:staff-login" %}"><button>پنل پشتیبان</button></a>
+                <a href="{% url "management:allocation-page" %}"><button>پنل ثبت و تخصیص</button></a>
             </div>
         </div>
     </div>

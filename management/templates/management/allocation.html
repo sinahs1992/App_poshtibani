@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت و تخصیص</title>
+    <link rel="stylesheet" href="{% static "css/inventory.css" %}">
+    <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script>
+</head>
+<body dir="rtl">
+    <div class="user">
+        <div class="user-navbar">
+            <div class="title-user">
+                <h1 id="user-name">رضا پوراصغر</h1>
+                <h2 id="date-now">
+                    <script>
+                        date =moment();
+                        date = date.format("hh/m");
+                        document.getElementById('date-now').innerHTML= date
+                    </script>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <!-- form -->
+    <div class="table">
+        <h1>تابلو ثبت و تخصیص</h1>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>وضعیت نصب</th>
+                    <th>وضعیت</th>
+                    <th>سریال دستگاه</th>
+                    <th>نام پشتیبان</th>
+                    <th>تاریخ حواله</th>
+                    <th>تاریخ رسید</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for device in all_devices %}
+                    <tr>
+                        <td><button class="td-button">نصب شد</button></td>
+                        <td>{{ device.status }}</td>
+                        <td>{{ device.device_code}}</td>
+                        <td>{{ device.staff.get_full_name }}</td>
+                        <td>{{ device.created_date|date:"Y/m/d"}}</td>
+                        <td>{{ device.receip_date|date:"Y/m/d" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form class="send" method="POST" action="">
+            {% csrf_token %}
+            <h1 class="send-h1">عودت دستگاه معیوب</h1>
+            <div class="send-input">
+                <label for="staff-name">نام پشتیبان</label>
+                <select name="staff-name" id="">
+                    <option value="" disabled="disabled">یک پشتیبان را انتخاب کنید</option>
+                    {% for staff in all_staffs %}
+                        <option value="{{ staff.id }}">{{ staff.get_full_name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="sn">سریال دستگاه معیوب</label>
+                <input type="text" name="sn" id="">
+            <button class="btn" type="submit">ثبت</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

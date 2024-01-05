@@ -23,10 +23,17 @@ class User(AbstractUser):
 class Staff(User):
     staff_code = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    class Meta:
+        verbose_name = 'Staff'
+        verbose_name_plural = 'Staffs'
 
 
 class AllocationManager(User):
     pass
 
 class WarehouseManager(User):
-    pass
+    class Meta:
+        verbose_name = 'WarehouseManager'
+        verbose_name_plural = 'WarehouseManagers'
