@@ -18,6 +18,7 @@ class User(AbstractUser):
     class Meta:
         permissions = [
             ("view_staff_page", "Can view staff page"),
+            ("view_admin_page", "Can view admin pages"),
         ]
 
 class Staff(User):

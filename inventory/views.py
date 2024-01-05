@@ -12,7 +12,9 @@ def index(request):
 @permission_required('accounts.view_staff_page', raise_exception=True)
 def staff_page(request):
 
-    rows = Device.objects.filter(Q(recepted=None) | Q(installed=None), staff=request.user)
+    rows = Device.objects.filter(Q(recepted=None) & Q(installed=None), staff=request.user)
     now = datetime.now()
     context = {'rows':rows, 'now':now}
     return render(request, 'inventory/job.html', context)
+
+

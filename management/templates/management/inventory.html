@@ -1,4 +1,6 @@
 {% load static %}
+{% load jformat %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +16,14 @@
         <div class="user-navbar">
             <div class="title-user">
                 <h1 id="user-name">رضا پوراصغر</h1>
-                <h2 id="date-now"><script>
-                date =moment();
-                date = date.format("hh/m");
-                document.getElementById('date-now').innerHTML= date
-                </script></h2>
+                <h2 id="date-now">
+                    {{ now|jformat:"%H:%M  %Y/%m/%d" }}
+                    {% comment %} <script>
+                    date =moment();
+                    date = date.format("hh/m");
+                    document.getElementById('date-now').innerHTML= date
+                    </script> {% endcomment %}
+                </h2>
             </div>
         </div>
     </div>
@@ -39,7 +44,13 @@
             <tbody>
                 {% for device in all_devices %}
                     <tr>
-                        <td><button class="td-button">رسید</button></td>
+                        
+                        <td>
+                            {% if device.status == "D" and not device.recepted %}
+                                <a href="{% url "management:installed" device_code=device.device_code %}" class="td-button">رسید</a>
+                            {% endif %}
+                        </td>
+
                         {% if device.status == 'I' %}
                             <td>نصب</td>
                         {% elif  device.status == 'O' %}

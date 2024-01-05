@@ -41,7 +41,14 @@
             <tbody>
                 {% for row in rows %}
                     <tr>
-                        <td>{{ row.status }}</td>
+                        
+                        {% if row.status == 'I' %}
+                            <td>نصب</td>
+                        {% elif  row.status == 'O' %}
+                            <td>انصرافی</td>
+                        {% elif row.status == 'D' %}
+                            <td>معیوب</td>
+                        {% endif %}
                         <td>{{ row.device_code }}</td>
                         <td>{{ row.created_date|jformat:"%Y/%m/%d" }}</td>
                     </tr>

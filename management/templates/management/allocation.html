@@ -1,4 +1,6 @@
 {% load static %}
+{% load jformat %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +15,14 @@
     <div class="user">
         <div class="user-navbar">
             <div class="title-user">
-                <h1 id="user-name">رضا پوراصغر</h1>
+                <h1 id="user-name">{{ request.user.get_full_name}}</h1>
                 <h2 id="date-now">
-                    <script>
+                    {{ now|jformat:"%H:%M  %Y/%m/%d" }}
+                    {% comment %} <script>
                         date =moment();
                         date = date.format("hh/m");
                         document.getElementById('date-now').innerHTML= date
-                    </script>
+                    </script> {% endcomment %}
                 </h2>
             </div>
         </div>
@@ -41,8 +44,14 @@
             <tbody>
                 {% for device in all_devices %}
                     <tr>
-                        <td><button class="td-button">نصب شد</button></td>
-                        <td>{{ device.status }}</td>
+                        <td><a href="" class="td-button">نصب شد</a></td>
+                        {% if device.status == 'I' %}
+                            <td>نصب</td>
+                        {% elif  device.status == 'O' %}
+                            <td>انصرافی</td>
+                        {% elif device.status == 'D' %}
+                            <td>معیوب</td>
+                        {% endif %}
                         <td>{{ device.device_code}}</td>
                         <td>{{ device.staff.get_full_name }}</td>
                         <td>{{ device.created_date|date:"Y/m/d"}}</td>

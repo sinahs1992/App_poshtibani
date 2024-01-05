@@ -20,6 +20,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.conf.urls import handler403
+from management.views import permission_denied_view
+
+# handler403 = permission_denied_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('inventory.urls')),
