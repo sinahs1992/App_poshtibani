@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.management_select_page, name='management-select-page'),
     path('allocation/', views.allocation_page, name='allocation-page'),
     path('inventory/', views.inventory_page, name='inventory-page'),
-    path('inventory/installed/<str:device_code>', views.installed, name="installed"),
+    path('inventory/recepted/<str:device_code>/', views.recepted, name="recepted"),
+    path('inventory/installed/<str:device_code>/', views.installed, name="installed"),
 ]
 

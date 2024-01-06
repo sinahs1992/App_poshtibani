@@ -44,7 +44,16 @@
             <tbody>
                 {% for device in all_devices %}
                     <tr>
-                        <td><a href="" class="td-button">نصب شد</a></td>
+                        <td>
+                            {% if device.status == "I" and not device.recepted and not device.installed %}
+                                <a href="{% url "management:installed" device_code=device.device_code %}" class="td-button">نصب شد</a>
+                            {% elif device.installed %}
+                                <p>نصب شد</p>
+                            {% elif device.recepted %}
+                                <p>رسید شد</p>
+                            {% endif %}
+                        </td>
+
                         {% if device.status == 'I' %}
                             <td>نصب</td>
                         {% elif  device.status == 'O' %}

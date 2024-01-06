@@ -15,7 +15,7 @@
     <div class="user">
         <div class="user-navbar">
             <div class="title-user">
-                <h1 id="user-name">رضا پوراصغر</h1>
+                <h1 id="user-name">{{ request.user.get_full_name}}</h1>
                 <h2 id="date-now">
                     {{ now|jformat:"%H:%M  %Y/%m/%d" }}
                     {% comment %} <script>
@@ -44,10 +44,17 @@
             <tbody>
                 {% for device in all_devices %}
                     <tr>
-                        
                         <td>
-                            {% if device.status == "D" and not device.recepted %}
-                                <a href="{% url "management:installed" device_code=device.device_code %}" class="td-button">رسید</a>
+                            {% if device.status == "D" and not device.installed and not device.recepted %}
+                                <a href="{% url "management:recepted" device_code=device.device_code %}" class="td-button">رسید</a>
+
+
+                            {% elif device.status == "I" and not device.installed and not device.recepted %}
+                                <a href="{% url "management:recepted" device_code=device.device_code %}" class="td-button">رسید</a>
+                            {% elif device.installed %}
+                                <p>نصب شد</p>
+                            {% elif device.recepted %}
+                                <p>رسید شد</p>
                             {% endif %}
                         </td>
 
@@ -66,18 +73,19 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form class="send" action="">
+        <form method="POST" class="send" action="">
+            {% csrf_token %}
             <h1 class="send-h1">حواله دستگاه</h1>
             <div class="send-input">
             <label for="staff-name">نام پشتیبان</label>
             <select name="staff-name" id="">
                 <option value="" disabled="disabled">یک پشتیبان را انتخاب کنید</option>
-                <option value="214">ایمان رفیعی</option>
-                <option value="217">رضا پوراصغر</option>
-                <option value="264">علی فراعی</option>
+                {% for staff in all_staffs %}
+                    <option value="{{ staff.id }}">{{ staff.get_full_name }}</option>
+                {% endfor %}
             </select>
             <label for="sn">سریال دستگاه</label>
-            <input type="text" name="sn" id="">
+            <input type="text" name="sn" id="" />
             <button class="btn" type="submit">ثبت</button>
             </div>
         </form>
