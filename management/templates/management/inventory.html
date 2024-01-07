@@ -51,6 +51,8 @@
 
                             {% elif device.status == "I" and not device.installed and not device.recepted %}
                                 <a href="{% url "management:recepted" device_code=device.device_code %}" class="td-button">رسید</a>
+                            {% elif device.status == "O" and not device.installed and not device.recepted %}
+                                <a href="{% url "management:recepted" device_code=device.device_code %}" class="td-button">رسید</a>
                             {% elif device.installed %}
                                 <p>نصب شد</p>
                             {% elif device.recepted %}

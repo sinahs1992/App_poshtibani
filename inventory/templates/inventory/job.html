@@ -55,12 +55,13 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form class="send" action="">
+        <form class="send" action="{% url "inventory:staff-page" %}" method="POST">
+            {% csrf_token %}
             <h1 class="send-h1">عودت دستگاه انصرافی</h1>
             <div class="send-input">
             <label for="sn">سریال دستگاه</label>
-            <input type="text" name="sn" id="">
-            <button class="btn" type="submit">ثبت</button>
+                <input type="text" name="sn" id="">
+                <button class="btn" type="submit">ثبت</button>
             </div>
         </form>
     </div>
