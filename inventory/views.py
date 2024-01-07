@@ -18,15 +18,14 @@ def staff_page(request):
         context = {'rows':rows, 'now':now}
         if request.method == "POST":
             staff = request.user.staff
-            print(staff.staff)
             sn = request.POST.get('sn')
             if staff and sn:
                 Device.objects.create(staff=staff, device_code=sn, status='O')
                 messages.success(request, 'دستگاه نصبی با موفقیت ثبت شد.')
-                return render(request, 'management/inventory.html', context)
+                return render(request, 'inventory/job.html', context)
             else:
                 messages.error(request, 'لطفاً تمام فیلدها را پر کنید.')
-
+                return render(request, 'inventory/job.html', context)
 
         return render(request, 'inventory/job.html', context)
     except PermissionError:
