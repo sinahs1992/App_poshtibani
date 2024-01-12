@@ -102,7 +102,6 @@ def installed(request, device_code):
         device.receip_date = timezone.now()
         device.save()
     except PermissionDenied:
-        print('PERMISSION')
         messages.error(request, "You do not have permission to view this page.")
         return redirect('inventory:index')    
     except Device.DoesNotExist:
